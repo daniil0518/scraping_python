@@ -4,6 +4,16 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import time
+import os
+from dotenv import load_env
+
+load_env()
+
+EMAIL_SENDER=os.getenv("EMAIL_SENDER")
+EMAIL_RECEIVER=os.getenv("EMAIL_RECEIVER")
+PASSWORD=os.getenv("PASSWORD")
+SMTP_SERVER=os.getenv("SMTP_SERVER")
+SMTP_SERVER_PORT=os.getenv("SMTP_SERVER_PORT")
 
 def scrape_shopify_websites():
     # Scrape the Shopify website directory
@@ -21,9 +31,9 @@ def scrape_shopify_websites():
 
 def send_email(websites):
     # Set up email configuration
-    email_sender = 'your_email@gmail.com'
-    email_receiver = 'recipient_email@gmail.com'
-    password = 'your_password'
+    email_sender = EMAIL_SENDER
+    email_receiver = EMAIL_RECEIVER
+    password = PASSWORD
 
     # Compose email message
     message = MIMEMultipart()
@@ -40,7 +50,7 @@ def send_email(websites):
     message.attach(MIMEText(body, 'plain'))
 
     # Connect to SMTP server and send email
-    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server = smtplib.SMTP(SMTP_SERVER, SMTP_SERVER_PORT)
     server.starttls()
     server.login(email_sender, password)
     text = message.as_string()
