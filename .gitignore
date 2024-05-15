@@ -1,3 +1,2 @@
 pyenv
-
-*.env.local
+*.local
