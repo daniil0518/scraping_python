@@ -5,9 +5,9 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import time
 import os
-from dotenv import load_env
+from dotenv import load_dotenv
 
-load_env()
+load_dotenv()
 
 EMAIL_SENDER=os.getenv("EMAIL_SENDER")
 EMAIL_RECEIVER=os.getenv("EMAIL_RECEIVER")
